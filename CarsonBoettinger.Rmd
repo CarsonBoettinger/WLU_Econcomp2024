@@ -1,0 +1,59 @@
+---
+title: "economics_comp_carsonB"
+author: "Carson Boettinger"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r}
+library(ggplot2)
+```
+
+```{r}
+econ <- testdata
+```
+
+```{r}
+# Creating the plot using ggplot2
+ggplot(econ, aes(x = csdid, y = col87)) +
+  geom_point() +
+  labs(x = "csdid", y = "col87", title = "Plot of col87 by csdid")
+```
+
+```{r}
+lin_model <- lm(col87 ~ col50 + col9 + col53 + col94 + col50, data=econ)
+summary(lin_model)
+```
+
+```{r}
+lin.res = resid(lin_model2)
+
+plot(econ$col87, lin.res,ylab="Residuals", xlab="Immigration", main="Resid plot") 
+
+```
+
+```{r}
+econ$testpimm <- predict(lin_model, data = econ)
+```
+
+```{r}
+ggplot(econ, aes(x = col87, y = pimm)) +
+  geom_point() +
+  labs(x = "Immigration", y = "pimm", title = "Plot of col87 by pimm")
+```
+```{r}
+# Calculate the residuals
+residuals <- econ$col87 - econ$testpimm
+
+# Calculate RMSE
+rmse <- sqrt(mean(econ$col87 -econ$testpimm)^2)
+
+# Print RMSE
+print(paste("RMSE:", rmse))
+```
+Using eval data now
+```{r}
+eval <-
+```
+
+
